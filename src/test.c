@@ -6,12 +6,21 @@
 
 int same_image(image a, image b){
     int i;
+    int diff_count = 0;
+    int first_diff = -1;
     if(a.w != b.w || a.h != b.h || a.c != b.c) return 0;
     for(i = 0; i < a.w*a.h*a.c; ++i){
-//if(!within_eps(a.data[i], b.data[i])) printf("%d %f %f\n", i, a.data[i], b.data[i]);
+        /*if(!within_eps(a.data[i], b.data[i])) {
+            if (first_diff < 0) {
+                first_diff = i;
+            }
+            diff_count++;
+            printf("%d %f %f\n", i, a.data[i], b.data[i]);
+        }*/
         if(!within_eps(a.data[i], b.data[i])) return 0;
     }
-    return 1;
+    printf("%d %d %d %d %d\n", first_diff, a.w*a.h, 2*a.w*a.h, a.w*a.h*a.c, diff_count);
+    return diff_count == 0;
 }
 
 void test_get_pixel(){
